@@ -241,8 +241,8 @@ function main() {
     const workspaceDir = workspaceFlag
       ? path.resolve(workspaceFlag)
       : stat.isDirectory()
-      ? absTarget
-      : path.dirname(absTarget);
+        ? absTarget
+        : path.dirname(absTarget);
 
     const reports: FileVerificationReport[] = [];
 
@@ -251,15 +251,40 @@ function main() {
       const decoys = dag.configSanitizationReports.flatMap(
         (c) => c.ignoredNoiseAndDecoyKeys
       );
-      for (const fileShort of dag.wavefrontBuildOrder) {
-        if (fileShort.includes('genesis-code-cli') || fileShort.includes('genesis-video-cli')) {
-          continue;
-        }
+      const candidateFiles = dag.wavefrontBuildOrder.filter(
+        (f) => !f.includes('genesis-code-cli') && !f.includes('genesis-video-cli')
+      );
+
+      // Map workspace-wide mustContain tokens to the files where they appear;
+      // any token missing from ALL files is assigned to the final file so directory verify catches it.
+      const fileContents = new Map<string, string>();
+      for (const fileShort of candidateFiles) {
+        const fullP = path.join(absTarget, fileShort);
+        fileContents.set(
+          fileShort,
+          fs.existsSync(fullP) ? fs.readFileSync(fullP, 'utf8') : ''
+        );
+      }
+
+      const unmatchedGlobalMustContain = mustContain.filter(
+        (token) =>
+          !Array.from(fileContents.values()).some((content) => content.includes(token))
+      );
+
+      for (let i = 0; i < candidateFiles.length; i++) {
+        const fileShort = candidateFiles[i];
+        const content = fileContents.get(fileShort) || '';
+        const isLastFile = i === candidateFiles.length - 1;
+        const fileScopedMustContain = [
+          ...mustContain.filter((token) => content.includes(token)),
+          ...(isLastFile ? unmatchedGlobalMustContain : []),
+        ];
+
         reports.push(
           verifyFileWithGuardrail({
             filePath: path.join(absTarget, fileShort),
             workspaceDir,
-            mustContain: reports.length === 0 ? mustContain : [],
+            mustContain: fileScopedMustContain,
             mustNotContain,
             autoDecoyKeys: decoys,
             enableRatchetRollback,
