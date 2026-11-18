@@ -1,0 +1,36 @@
+{
+  "name": "genesis-skills",
+  "version": "1.0.0",
+  "description": "Zero-key Multi-File Code Dependency DAG Guardrail, Persistent Failure Memory, Monotonic Workspace Ratchet & Cross-Shot Video Continuity Skills + CLI for Antigravity, Claude Code, Cursor, Gemini CLI, and Google Flow / Veo / Sora.",
+  "keywords": [
+    "ai-agent-skills",
+    "claude-code",
+    "antigravity",
+    "cursor-rules",
+    "gemini-cli",
+    "codex",
+    "code-verification",
+    "video-continuity",
+    "google-flow",
+    "veo",
+    "sora",
+    "ffmpeg"
+  ],
+  "bin": {
+    "genesis-skills": "./bin/genesis-skills.mjs"
+  },
+  "scripts": {
+    "init": "node ./bin/genesis-skills.mjs init",
+    "prepare-code": "npx --yes tsx ./src/code/cli.ts prepare",
+    "verify-code": "npx --yes tsx ./src/code/cli.ts verify",
+    "audit-code": "npx --yes tsx ./src/code/cli.ts audit",
+    "video-compile": "npx --yes tsx ./src/video/cli.ts compile-shots",
+    "video-anchor": "npx --yes tsx ./src/video/cli.ts extract-anchor",
+    "video-audit": "npx --yes tsx ./src/video/cli.ts audit-and-blend",
+    "test": "npx --yes tsx --test ./tests/genesis-skills.test.ts"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "license": "MIT"
+}

@@ -1,0 +1,36 @@
+{
+  "projectTitle": "Observatory Bioluminescent Vial Sequence",
+  "character": {
+    "name": "Dr. Elena Vance",
+    "physicalDescription": "35-year-old woman with dark hair tied in a neat low bun",
+    "wardrobeDescription": "a tailored silver-gray lab coat over a dark navy turtleneck"
+  },
+  "environment": {
+    "settingDescription": "a high-altitude glass observatory at night with rain streaks on the glass behind her",
+    "cameraFocalLengthMm": 35,
+    "lightingDescription": "Soft cyan-white key light from top-left",
+    "primaryLightVector": [-0.5, 0.8, -0.3]
+  },
+  "shots": [
+    {
+      "shotId": "shot_01_inspect_vial",
+      "durationSec": 8,
+      "atomicAction": "She slowly lifts a glowing cyan glass vial with her bare right hand from the steel table to eye level and inspects the swirling bioluminescent liquid.",
+      "startPoseAnchor": "Standing centered behind the brushed-steel console, right hand resting on the base of the glowing cyan glass vial on the table.",
+      "endPoseAnchor": "Holding the glowing cyan glass vial steady at chest-to-chin height in her bare right hand, looking calmly at the vial.",
+      "dialogueLine": "Phase-two bioluminescence is stable.",
+      "activeProp": "glowing_cyan_glass_vial",
+      "directorNote": "Keep tripod locked; do not cut early."
+    },
+    {
+      "shotId": "shot_02_pour_beaker",
+      "durationSec": 8,
+      "atomicAction": "She smoothly tilts the glowing cyan glass vial in her bare right hand and pours a steady laminar stream of glowing cyan liquid downward into a clear glass beaker on the brushed-steel console.",
+      "startPoseAnchor": "CONTINUATION FROM SHOT 1 END FRAME: Holding the glowing cyan glass vial at chest-to-chin height in her bare right hand above a clear glass beaker on the brushed-steel console.",
+      "endPoseAnchor": "The glowing cyan liquid settles calmly at the bottom of the glass beaker as she lowers the empty vial back toward the table.",
+      "dialogueLine": "Transfer complete.",
+      "activeProp": "glowing_cyan_glass_vial_and_beaker",
+      "directorNote": "Ensure natural downward fluid gravity."
+    }
+  ]
+}
