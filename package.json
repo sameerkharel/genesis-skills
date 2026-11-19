@@ -1,33 +1,29 @@
 {
-  "name": "genesis-skills",
-  "version": "1.0.0",
-  "description": "Zero-key Multi-File Code Dependency DAG Guardrail, Persistent Failure Memory, Monotonic Workspace Ratchet & Cross-Shot Video Continuity Skills + CLI for Antigravity, Claude Code, Cursor, Gemini CLI, and Google Flow / Veo / Sora.",
+  "name": "genesis-code",
+  "version": "2.0.0",
+  "description": "Zero-dependency deterministic verification gate, real test-gated auto-rollback ratchet, cross-session failure memory, and dependency DAG scanner for AI coding agents (Antigravity, Claude Code, Cursor, Gemini CLI).",
   "keywords": [
-    "ai-agent-skills",
-    "claude-code",
+    "ai-coding-agents",
+    "agent-skills",
+    "claude-code-hooks",
     "antigravity",
     "cursor-rules",
-    "gemini-cli",
-    "codex",
-    "code-verification",
-    "video-continuity",
-    "google-flow",
-    "veo",
-    "sora",
-    "ffmpeg"
+    "deterministic-verification",
+    "auto-rollback",
+    "dependency-dag",
+    "failure-memory"
   ],
   "bin": {
-    "genesis-skills": "./bin/genesis-skills.mjs"
+    "genesis-code": "./bin/genesis-code.mjs"
   },
   "scripts": {
-    "init": "node ./bin/genesis-skills.mjs init",
-    "prepare-code": "npx --yes tsx ./src/code/cli.ts prepare",
-    "verify-code": "npx --yes tsx ./src/code/cli.ts verify",
-    "audit-code": "npx --yes tsx ./src/code/cli.ts audit",
-    "video-compile": "npx --yes tsx ./src/video/cli.ts compile-shots",
-    "video-anchor": "npx --yes tsx ./src/video/cli.ts extract-anchor",
-    "video-audit": "npx --yes tsx ./src/video/cli.ts audit-and-blend",
-    "test": "npx --yes tsx --test ./tests/genesis-skills.test.ts"
+    "init": "node ./bin/genesis-code.mjs init",
+    "prepare-code": "npx --yes tsx ./src/cli.ts prepare",
+    "verify-code": "npx --yes tsx ./src/cli.ts verify",
+    "audit-code": "npx --yes tsx ./src/cli.ts audit",
+    "lessons": "npx --yes tsx ./src/cli.ts lessons",
+    "test": "npx --yes tsx --test ./tests/genesis-code.test.ts",
+    "benchmark:compare": "npx --yes tsx --test ./tests/compare-v2-vs-dist.test.ts"
   },
   "engines": {
     "node": ">=18.0.0"

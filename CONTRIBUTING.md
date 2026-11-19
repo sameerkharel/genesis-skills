@@ -1,22 +1,20 @@
-# Contributing to GENESIS Skills
+# Contributing to GENESIS Code
 
-Thank you for contributing to `genesis-skills`!
+Contributions, bug reports, and benchmark improvements are welcome.
 
-## Core Engineering Principles
-
-1. **Zero External API Keys in Local Skill CLIs:**
-   `genesis-code-cli.ts` and `genesis-video-cli.ts` must execute 100% locally in milliseconds using standard Node.js (`fs`, `path`, `child_process`) and `ffmpeg`/`ffprobe` (for video pixel decoding).
-2. **100% Honest Telemetry (Zero Simulated Numbers):**
-   Every metric returned by `prepare`, `verify`, or `audit-and-blend` must be computed dynamically from real files on disk or real decoded `rgb24` video frames. Never hardcode benchmark tables or fake scores inside engine modules.
-3. **Lazy-First Ergonomics:**
-   Every CLI command must work with sensible defaults (e.g., `prepare .` and `verify .`) without forcing the user or LLM agent to manually type long CSV parameter lists.
-
-## Running the Test Suite
-
-Before opening a pull request, run the built-in Node test suite:
+## Development Setup
 
 ```bash
+# Run the full unit and integration test suite (Node >= 18)
 npm test
+
+# Run the CLI directly against the sample project
+npm run prepare-code -- examples/sample-project
+npm run verify-code -- examples/sample-project --syntax
 ```
 
-All 8 unit and integration tests (covering topological DAG ordering, decoy config sanitization, AST skeleton extraction, static file verification, multi-shot prompt compilation, semantic track caching, real `ffmpeg` MP4 auditing, and 1-command multi-IDE installation) must pass with zero warnings.
+## Engineering Principles
+
+1. **Zero runtime dependencies:** Core verification modules (`src/*.ts`) should rely only on Node.js built-in modules (`node:fs`, `node:path`, `node:crypto`, `node:child_process`).
+2. **100% measured outputs:** Never emit synthetic, mocked, or hardcoded metrics in CLI responses. Every reported value must come directly from disk content, subprocess exit codes, or real SHA-256 digests.
+3. **Tests for every change:** Add unit tests in `tests/genesis-code.test.ts` covering any new parser rule, verifier flag, or hook behavior.
